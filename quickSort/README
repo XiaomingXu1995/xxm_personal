@@ -1,0 +1,18 @@
+created by xxm on 12/3/2018
+
+several questions need to be noticed:
+//*****************************************************************************************************************************
+Be careful of the index of the array. Make sure that your index will not outof array's bound.
+if you choose one standard to initialize the index, unite the index to your standard.
+for example:
+	if you set array index from 1 to n ,then you must pay attention to the index is not the real index, it means the "index+1".
+To avoid unnessary problem ,you'd better use the real index: index from 0 to n-1;
+
+//*****************************************************************************************************************************
+In the main demo ,if you want to initialize with the element of random number, you can call the c++11 lib of std::default_random_engine;
+If you want to set the bound of the random ,you can use the std::uniform_int_distribution;
+
+And more interesting thing is that the random number is not recreated every time. In other words,the ramdom number will be the same if you
+only recompile it or rerun it without change the source code. The lib_function is so interesting and you must be careful in the next time.
+
+Finally, remember add the compile parameter of "-std=c++11" because the random lib_function is only suported since the version c++11.
