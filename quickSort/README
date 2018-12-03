@@ -16,3 +16,6 @@ And more interesting thing is that the random number is not recreated every time
 only recompile it or rerun it without change the source code. The lib_function is so interesting and you must be careful in the next time.
 
 Finally, remember add the compile parameter of "-std=c++11" because the random lib_function is only suported since the version c++11.
+
+//*****************************************************************************************************************************
+Never forget free() after the malloc(); Modified by the second commit.

@@ -59,6 +59,8 @@ int main(){
 	quickSort(arrdemo,0,99);
 	printArr(arrdemo,100);
 
+	free(arrdemo);
+
 	return 0;
 
 }
