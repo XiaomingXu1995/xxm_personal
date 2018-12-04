@@ -1,0 +1,24 @@
+//*****************************************************************************
+the time of the climbStairs_naive is about 42 seconds when parameter is 45;
+it is 25 seconds when parameter is 44;
+
+
+//*****************************************************************************
+by using the array to topdown initialize the middle result to avoid duplicated 
+computing. but the time is 2 minites and 36 seconds when parameter is 44;
+
+the using of array makes the program slower.
+So ,we need to change the recursion into the loop.
+
+//*****************************************************************************
+Finially, the result of the optimalize time is 0.01 seconds.
+which is obveriously faster than the implementation of recursion iterator.
+
+//*****************************************************************************
+the first version is the climbStairs_naive.cpp
+the second version is the climbStairs_middleArray.cpp
+the last version is the climbStairs_optimalize.cpp
+
+
+//*****************************************************************************
+it is the same with the fibonacci function.
