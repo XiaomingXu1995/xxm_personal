@@ -1,3 +1,11 @@
+/*
+ * a naive without optimizing tools to solve sudoku problem.
+ *
+ *author:xxm
+ *email: xiaomingxu@mail.sdu.edu.cn
+ *
+ */
+
 #include <iostream>
 #include <cstdlib>
 #include <vector>
