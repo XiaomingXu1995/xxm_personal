@@ -1,6 +1,8 @@
 #include <iostream>
 #include <cstdlib>
 #include <vector>
+#include <fstream>
+#include <sstream>
 
 using namespace std;
 
@@ -8,6 +10,27 @@ vector < vector<int> > rowFArray, volFArray, blockFArray;
 vector < int > indexArray;
 vector <int> resultArray;
 
+void readFile(string filename, vector< vector<int> > &arr, int len){
+	ifstream data(filename.c_str());
+	string line;
+	if(!data.is_open()){
+		cerr << "unable open the file!" << endl;
+		exit(1);
+	}
+
+	for(int i = 0; i < len; i++){
+		getline(data, line);
+		stringstream s1;
+		s1 << line;
+		int tmp;
+		vector<int> tmpArr;
+		for(int j = 0; j < 3; j++){
+			s1 >> tmp;
+			tmpArr.push_back(tmp);
+		}
+		arr.push_back(tmpArr);
+	}
+}
 
 
 void printFArray(vector < vector<int> > FArray){
@@ -239,43 +262,59 @@ bool solveSudo(vector<int> &resArray, vector < vector<int> > &rowfArray, vector 
 int main(int argc, char* argv[]){
     initFArray();
 	initResultArray();
-    int filledNum = 27;
-    //int inputArray[filledNum][3] = { {0, 0, 9},
-    int inputArray[][3] = 
-                                   { {0, 0, 9},
-                                     {0, 4, 2},
-                                     {0, 6, 4},
-                                     {0, 8, 1},
-                                     {1, 2, 5},
-                                     {1, 4, 9},
-                                     {1, 7, 2},
-                                     {2, 1, 4},
-                                     {2, 3, 1},
-                                     {2, 7, 9},
-                                     {2, 8, 7},
-                                     {3, 0, 5},
-                                     {3, 5, 1},
-                                     {4, 8, 2},
-                                     {5, 0, 4},
-                                     {5, 3, 5},
-                                     {5, 4, 7},
-                                     {5, 6, 3},
-                                     {5, 8, 9},
-                                     {6, 1, 5},
-                                     {6, 2, 3},
-                                     {6, 5, 2},
-                                     {6, 6, 1},
-                                     {6, 7, 8},
-                                     {8, 2, 2},
-                                     {8, 3, 8},
-                                     {8, 8, 3}};
 
+    int filledNum = 27;
+	if(argc >= 2){
+		filledNum = stoi(argv[1]);
+	}
+
+
+
+	//int inputArray[filledNum][3];
+	vector< vector<int> > inputArray;
+	readFile("input.txt", inputArray, filledNum);
+	
+    //int inputArray[filledNum][3] = { {0, 0, 9},//compile error
+//    int inputArray[][3] = 
+//                                   { {0, 0, 9},
+//                                     {0, 4, 2},
+//                                     {0, 6, 4},
+//                                     {0, 8, 1},
+//                                     {1, 2, 5},
+//                                     {1, 4, 9},
+//                                     {1, 7, 2},
+//                                     {2, 1, 4},
+//                                     {2, 3, 1},
+//                                     {2, 7, 9},
+//                                     {2, 8, 7},
+//                                     {3, 0, 5},
+//                                     {3, 5, 1},
+//                                     {4, 8, 2},
+//                                     {5, 0, 4},
+//                                     {5, 3, 5},
+//                                     {5, 4, 7},
+//                                     {5, 6, 3},
+//                                     {5, 8, 9},
+//                                     {6, 1, 5},
+//                                     {6, 2, 3},
+//                                     {6, 5, 2},
+//                                     {6, 6, 1},
+//                                     {6, 7, 8},
+//                                     {8, 2, 2},
+//                                     {8, 3, 8},
+//                                     {8, 8, 3}};
+//
     for(int i = 0; i < filledNum; i++){
-        updateFArray(inputArray[i][0], inputArray[i][1],inputArray[i][2]);
-        int tmpIndex = inputArray[i][0] * 9 + inputArray[i][1];
+        updateFArray(inputArray[i][0]-1, inputArray[i][1]-1,inputArray[i][2]);
+        int tmpIndex = (inputArray[i][0]-1) * 9 + inputArray[i][1]-1;
         indexArray.push_back(tmpIndex);
 		resultArray[tmpIndex] = inputArray[i][2];
+		//cout << inputArray[i][0]+1 << " ";
+		//cout << inputArray[i][1]+1 << " ";
+		//cout << inputArray[i][2] << " ";
+		//cout << endl;
     }
+	//exit(0);
 
 //	for(int i = 0; i < indexArray.size(); i++){
 //		cout << indexArray[i] << endl;
@@ -294,7 +333,7 @@ int main(int argc, char* argv[]){
 	printFArray(blockFArray);
 
 	cout << "start the sloveSudo!" << endl;
-	bool result = solveSudo(resultArray, rowFArray, volFArray, blockFArray, 0, 81-27);
+	bool result = solveSudo(resultArray, rowFArray, volFArray, blockFArray, 0, 81-filledNum);
 	cout << "end the solveSudo!" << endl;
 	if(result){
 		for(int i = 0; i < 9; i++){
