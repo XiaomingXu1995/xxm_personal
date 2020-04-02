@@ -77,6 +77,10 @@ int main(){
 	cerr << "ther result0 is: " << result0 << endl;
 	cerr << "ther result1 is: " << result1 << endl;
 
+	free(arr);
+	free(arr0);
+	free(arr1);
+
 	return 0;
 
 
